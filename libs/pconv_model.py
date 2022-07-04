@@ -327,3 +327,6 @@ class PConvUnet(object):
         """Run prediction using this model"""
         return self.model.predict(sample, **kwargs)
     
+    def layers(self):
+        """ returns the layers of the model to help in debugging"""
+        return self.model.layers
