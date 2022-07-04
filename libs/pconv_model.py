@@ -41,7 +41,8 @@ class PConvUnet(object):
         self.net_name = net_name
         self.gpus = gpus
         self.vgg_device = vgg_device
-
+        self.built = False
+        
         # Scaling for VGG input
         self.mean = [0.485, 0.456, 0.406]
         self.std = [0.229, 0.224, 0.225]
@@ -159,7 +160,7 @@ class PConvUnet(object):
         
         # Setup the model inputs / outputs
         model = Model(inputs=[inputs_img, inputs_mask], outputs=outputs)
-
+        self.built = True
         return model, inputs_mask    
 
     def compile_pconv_unet(self, model, inputs_mask, lr=0.0002):
@@ -260,9 +261,10 @@ class PConvUnet(object):
 
     def load(self, filepath, train_bn=True, lr=0.0002, **kwargs):
 
-        # Create UNet-like model
-        self.model, inputs_mask = self.build_pconv_unet(train_bn)
-        self.compile_pconv_unet(self.model, inputs_mask, lr) 
+        # Create UNet-like model if it has not been built
+        if(!self.built):
+            self.model, inputs_mask = self.build_pconv_unet(train_bn)
+            self.compile_pconv_unet(self.model, inputs_mask, lr) 
 
         # Load weights into model
         epoch = int(os.path.basename(filepath).split('.')[1].split('-')[0])
@@ -324,3 +326,4 @@ class PConvUnet(object):
     def predict(self, sample, **kwargs):
         """Run prediction using this model"""
         return self.model.predict(sample, **kwargs)
+    
