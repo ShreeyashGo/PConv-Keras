@@ -258,7 +258,7 @@ class PConvUnet(object):
         """Get summary of the UNet model"""
         print(self.model.summary())
 
-    def load(self, filepath, train_bn=True, lr=0.0002):
+    def load(self, filepath, train_bn=True, lr=0.0002, **kwargs):
 
         # Create UNet-like model
         self.model, inputs_mask = self.build_pconv_unet(train_bn)
@@ -268,7 +268,7 @@ class PConvUnet(object):
         epoch = int(os.path.basename(filepath).split('.')[1].split('-')[0])
         assert epoch > 0, "Could not parse weight file. Should include the epoch"
         self.current_epoch = epoch
-        self.model.load_weights(filepath)        
+        self.model.load_weights(filepath, **kwargs)        
 
     @staticmethod
     def PSNR(y_true, y_pred):
