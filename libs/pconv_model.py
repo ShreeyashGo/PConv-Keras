@@ -262,7 +262,7 @@ class PConvUnet(object):
     def load(self, filepath, train_bn=True, lr=0.0002, **kwargs):
 
         # Create UNet-like model if it has not been built
-        if(!self.built):
+        if(not self.built):
             self.model, inputs_mask = self.build_pconv_unet(train_bn)
             self.compile_pconv_unet(self.model, inputs_mask, lr) 
 
