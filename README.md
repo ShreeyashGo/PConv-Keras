@@ -22,7 +22,7 @@ Step 5: Simplistic attempt at predicting arbitrary image sizes through image chu
 ## Pre-trained weights
 I've ported the VGG16 weights from PyTorch to keras; this means the `1/255.` pixel scaling can be used for the VGG16 network similarly to PyTorch. 
 * [Ported VGG 16 weights](https://drive.google.com/open?id=1HOzmKQFljTdKWftEP-kWD7p2paEaeHM0)
-* [PConv on Imagenet](https://drive.google.com/open?id=1OdbuNJj4gV9KUoknQG063jJrJ1srhBvU)
+* [PConv on Imagenet](https://drive.google.com/file/d/1M4sYvHgKX09gDTCslvUrUj23qWMhNcio/view?usp=sharing)
 * PConv on Places2 [needs training]
 * PConv on CelebaHQ [needs training]
 
